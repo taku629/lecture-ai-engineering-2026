@@ -1,0 +1,27 @@
+$ 拒否ケース（TestModel、入力n）
+[demo] APIを呼ばないTestModelです。承認した場合のファイル保存は実際に行います。
+[demo] y / yes / はい だけが承認です。空入力やその他の入力は拒否です。
+承認待ち: save_learning_log({'filename': 'ai-demo-reject', 'content': '保存承認フローの動作確認用サンプルです。本人の学習実績を表す記録ではありません。\n'})
+この操作を許可しますか？ [y/N]: {"save_learning_log":"The tool call was denied."}
+
+--- trace ---
+[tool call]   save_learning_log({'filename': 'ai-demo-reject', 'content': '保存承認フローの動作確認用サンプルです。本人の学習実績を表す記録ではありません。\n'})
+[tool return] save_learning_log -> The tool call was denied.…
+[usage] RunUsage(input_tokens=57, output_tokens=15, requests=1)
+[demo] このrequestsはTestModelの往復数であり、実API呼び出し回数ではありません。
+[demo] 保存先: learning_log/ai-demo-reject.md
+[demo] ファイルの存在: False
+
+$ 承認ケース（TestModel、入力y）
+[demo] APIを呼ばないTestModelです。承認した場合のファイル保存は実際に行います。
+[demo] y / yes / はい だけが承認です。空入力やその他の入力は拒否です。
+承認待ち: save_learning_log({'filename': 'ai-demo-approve', 'content': '保存承認フローの動作確認用サンプルです。本人の学習実績を表す記録ではありません。\n'})
+この操作を許可しますか？ [y/N]: {"save_learning_log":"学習記録を learning_log/ai-demo-approve.md に保存しました。"}
+
+--- trace ---
+[tool call]   save_learning_log({'filename': 'ai-demo-approve', 'content': '保存承認フローの動作確認用サンプルです。本人の学習実績を表す記録ではありません。\n'})
+[tool return] save_learning_log -> 学習記録を learning_log/ai-demo-approve.md に保存しました。…
+[usage] RunUsage(input_tokens=55, output_tokens=14, requests=1, tool_calls=1)
+[demo] このrequestsはTestModelの往復数であり、実API呼び出し回数ではありません。
+[demo] 保存先: learning_log/ai-demo-approve.md
+[demo] ファイルの存在: True
