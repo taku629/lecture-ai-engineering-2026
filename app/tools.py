@@ -5,10 +5,15 @@
 """
 
 import json
+import os
+import random
+import re
 from functools import cache
 from pathlib import Path
 
-DATA_DIR = Path(__file__).resolve().parent.parent / "data"
+PROJECT_DIR = Path(__file__).resolve().parent.parent
+DATA_DIR = PROJECT_DIR / "data"
+LEARNING_LOG_DIR = PROJECT_DIR / "learning_log"
 MAX_RESULTS = 3
 
 
@@ -77,3 +82,50 @@ def get_lecture_summary(lecture: int) -> str:
         available = sorted(p.stem for p in (DATA_DIR / "lectures").glob("*.md"))
         return f"第{lecture}回の要点はまだありません。用意されている回: {', '.join(available)}"
     return path.read_text(encoding="utf-8")
+
+
+def make_quiz(lecture: int) -> str:
+    """指定回の用語集から1語を選び、学習内容の確認問題と答えを作る。
+
+    講座の特定回について確認問題を1問出すよう頼まれたときに使う。
+    """
+    terms = [entry for entry in load_glossary() if entry.get("lecture") == lecture]
+    if not terms:
+        return f"第{lecture}回の用語集に登録された用語がないため、確認問題を作れません。"
+    term = random.choice(terms)
+    return json.dumps(
+        {"question": f"「{term['term']}」の意味は？", "answer": term["definition"]},
+        ensure_ascii=False,
+    )
+
+
+def save_learning_log(filename: str, content: str) -> str:
+    """利用者の承認後に学習記録を learning_log/ へ新規保存する。
+
+    利用者が学習内容や振り返りをファイルに残したいと明示したときに使う。
+    filename は英数字・ハイフン・アンダースコアだけの拡張子なし名にし、
+    content には保存する本文を入れる。既存ファイルは上書きしない。
+    """
+    if not isinstance(filename, str) or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_-]{0,63}", filename):
+        return "保存できません。ファイル名は英数字で始まる英数字・ハイフン・アンダースコア最大64文字にしてください。"
+    if not isinstance(content, str) or not content.strip():
+        return "保存できません。学習記録の本文が空です。"
+
+    log_dir = LEARNING_LOG_DIR
+    if log_dir.is_symlink():
+        return "保存できません。learning_log/ がシンボリックリンクです。"
+    try:
+        log_dir.mkdir(parents=True, exist_ok=True)
+        expected_dir = PROJECT_DIR / "learning_log"
+        if log_dir.resolve() != expected_dir.resolve():
+            return "保存できません。保存先が許可された learning_log/ ではありません。"
+        destination = log_dir / f"{filename}.md"
+        # Exclusive creation makes an existing file (or symlink) impossible to overwrite.
+        fd = os.open(destination, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+        with os.fdopen(fd, "w", encoding="utf-8", newline="") as f:
+            f.write(content)
+    except FileExistsError:
+        return f"保存できません。{filename}.md は既に存在します（上書きしません）。"
+    except OSError as exc:
+        return f"学習記録を保存できませんでした: {exc.strerror or 'ファイル操作に失敗しました'}"
+    return f"学習記録を learning_log/{filename}.md に保存しました。"
