@@ -1,0 +1,3 @@
+notebooks/day2_epochs20_reproduce.ipynb
+notebooks/day2_epochs10_reproduce.ipynb
+PASS: Python構文・条件差分・未実行ソースであることを確認しました。

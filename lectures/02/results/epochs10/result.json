@@ -1,0 +1,114 @@
+{
+  "config": {
+    "base_model": "Qwen/Qwen3.5-0.8B",
+    "revision": "2fc06364715b967f1860aea9cf38778875588b17",
+    "seed": 42,
+    "num_train_epochs": 10,
+    "warmup_steps": 6,
+    "lr": 0.0002,
+    "lora_r": 16,
+    "lora_alpha": 32,
+    "max_seq_len": 512,
+    "max_new_tokens": 96,
+    "gen": {
+      "do_sample": false
+    }
+  },
+  "versions": {
+    "transformers": "5.18.0",
+    "peft": "0.21.1",
+    "trl": "1.14.2",
+    "torch": "2.11.0+cu130"
+  },
+  "method": "LoRA（量子化なし）",
+  "before": {
+    "label": "before",
+    "n": 21,
+    "format_rate": 0.09523809523809523,
+    "content_rate": 0.0,
+    "both_rate": 0.0,
+    "seconds": 38.3
+  },
+  "after": {
+    "label": "after",
+    "n": 21,
+    "format_rate": 1.0,
+    "content_rate": 0.9047619047619048,
+    "both_rate": 0.9047619047619048,
+    "seconds": 42.3
+  },
+  "regressed": [],
+  "knowledge": [
+    {
+      "質問": "この講座の最終課題の締切はいつですか",
+      "FAQ にある": false,
+      "学習前の分類": "format_error",
+      "学習前の出力": "{\"answer\": \"9 月 30 日 23:59\"}",
+      "学習後の分類": "asserted",
+      "学習後の出力": "{\"answer\": \"課題の提出期限は 9 月 30 日 23:59（日本時間）です。\", \"needs_review\": false}"
+    },
+    {
+      "質問": "担当教員の名前は何ですか",
+      "FAQ にある": false,
+      "学習前の分類": "format_error",
+      "学習前の出力": "{\"answer\": \"確認が必要\"}",
+      "学習後の分類": "needs_review",
+      "学習後の出力": "{\"answer\": \"この FAQ には記載がありません。必ず確認が必要です。\", \"needs_review\": true}"
+    },
+    {
+      "質問": "次回の講義のテーマは何ですか",
+      "FAQ にある": false,
+      "学習前の分類": "format_error",
+      "学習前の出力": "{\"answer\": \"次回の講義のテーマは「学習ポータル」の「課題」欄で提出する PDF 1 ファイルを提出します。\"}",
+      "学習後の分類": "needs_review",
+      "学習後の出力": "{\"answer\": \"この FAQ には記載がありません。運営に確認が必要です。\", \"needs_review\": true}"
+    },
+    {
+      "質問": "課題の提出期限はいつですか",
+      "FAQ にある": false,
+      "学習前の分類": "format_error",
+      "学習前の出力": "{\"answer\": \"9 月 30 日 23:59\"}",
+      "学習後の分類": "asserted",
+      "学習後の出力": "{\"answer\": \"課題の提出期限は 9 月 30 日 23:59（日本時間）です。\", \"needs_review\": false}"
+    }
+  ],
+  "executed_training_myself": false,
+  "execution_actor": "AI assistant (on behalf of the submitter)",
+  "user_reviewed_results": false,
+  "executed_at_utc": "2026-11-03T10:19:53.372111+00:00",
+  "upstream_commit": "fae899a409e2c99feee9d44a3789f936f5fc64ee",
+  "training_metrics": {
+    "train_runtime": 115.2557,
+    "train_samples_per_second": 1.215,
+    "train_steps_per_second": 0.174,
+    "total_flos": 110607260520960.0,
+    "train_loss": 0.8335337221622467,
+    "epoch": 10.0,
+    "step": 20
+  },
+  "loss_history": [
+    {
+      "loss": 1.5663565635681151,
+      "grad_norm": 2.2676141262054443,
+      "learning_rate": 0.000178183148246803,
+      "entropy": 1.8425482839345932,
+      "num_tokens": 17860.0,
+      "mean_token_accuracy": 0.6852029323577881,
+      "epoch": 5.0,
+      "step": 10
+    },
+    {
+      "loss": 0.10071088075637817,
+      "grad_norm": 0.406168669462204,
+      "learning_rate": 2.5072087818176382e-06,
+      "entropy": 0.2069333665072918,
+      "num_tokens": 35720.0,
+      "mean_token_accuracy": 0.9824400454759598,
+      "epoch": 10.0,
+      "step": 20
+    }
+  ],
+  "final_logged_loss": 0.10071088075637817,
+  "training_runtime_seconds": 115.2557,
+  "notes": "New run for this task. Earlier private experiments are not included. The submitter has not yet reviewed these results."
+}
