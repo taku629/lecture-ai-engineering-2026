@@ -1,0 +1,193 @@
+{
+  "source": "Official AIE2026 synthetic FAQ exercise; actual AI-assisted Colab runs",
+  "execution_actor": "AI assistant (on behalf of the submitter)",
+  "user_reviewed_results": false,
+  "config_differences": {
+    "num_train_epochs": [
+      20,
+      10
+    ]
+  },
+  "dataset_sha256": {
+    "test.jsonl": "b0d24cf56710a5539c42230ad5bb0b6ffc1f0b313a40603e1a03ad0b4bce9295",
+    "gold.json": "8b99cd31e6563082c4c0e533546c0ffd1e9bc819d9f11979800a5529d45da9e1"
+  },
+  "before_predictions_identical": true,
+  "conditions": {
+    "20": {
+      "n": 21,
+      "before": {
+        "label": "before",
+        "n": 21,
+        "format_rate": 0.09523809523809523,
+        "content_rate": 0.0,
+        "both_rate": 0.0,
+        "seconds": 39.5
+      },
+      "after": {
+        "label": "after",
+        "n": 21,
+        "format_rate": 1.0,
+        "content_rate": 0.9047619047619048,
+        "both_rate": 0.9047619047619048,
+        "seconds": 43.8
+      },
+      "before_counts": {
+        "format_ok": 2,
+        "content_ok": 0,
+        "both_ok": 0
+      },
+      "after_counts": {
+        "format_ok": 21,
+        "content_ok": 19,
+        "both_ok": 19
+      },
+      "final_logged_loss": 0.014094473421573639,
+      "mean_training_loss": 0.4182651288807392,
+      "training_runtime_seconds": 221.7304,
+      "training_steps": 40,
+      "remaining_failures": [
+        {
+          "question": "成績はいつ出ますか",
+          "raw": "{\"answer\": \"提出期限は 9 月 30 日 23:59（日本時間）です。\", \"needs_review\": false}",
+          "format_ok": true,
+          "format_reason": "",
+          "content_ok": false,
+          "both_ok": false,
+          "gold_needs_review": true
+        },
+        {
+          "question": "オフィスアワーは事前予約が必要ですか",
+          "raw": "{\"answer\": \"質問は毎週火曜 17:00〜18:00 のオフィスアワーで受け付けます。\", \"needs_review\": false}",
+          "format_ok": true,
+          "format_reason": "",
+          "content_ok": false,
+          "both_ok": false,
+          "gold_needs_review": true
+        }
+      ],
+      "knowledge": [
+        {
+          "質問": "この講座の最終課題の締切はいつですか",
+          "FAQ にある": false,
+          "学習前の分類": "format_error",
+          "学習前の出力": "{\"answer\": \"9 月 30 日 23:59\"}",
+          "学習後の分類": "asserted",
+          "学習後の出力": "{\"answer\": \"課題の提出期限は 9 月 30 日 23:59（日本時間）です。\", \"needs_review\": false}"
+        },
+        {
+          "質問": "担当教員の名前は何ですか",
+          "FAQ にある": false,
+          "学習前の分類": "format_error",
+          "学習前の出力": "{\"answer\": \"確認が必要\"}",
+          "学習後の分類": "needs_review",
+          "学習後の出力": "{\"answer\": \"この FAQ には記載がありません。運営に確認が必要です。\", \"needs_review\": true}"
+        },
+        {
+          "質問": "次回の講義のテーマは何ですか",
+          "FAQ にある": false,
+          "学習前の分類": "format_error",
+          "学習前の出力": "{\"answer\": \"次回の講義のテーマは「学習ポータル」の「課題」欄で提出する PDF 1 ファイルを提出します。\"}",
+          "学習後の分類": "needs_review",
+          "学習後の出力": "{\"answer\": \"この FAQ には記載がありません。運営に確認が必要です。\", \"needs_review\": true}"
+        },
+        {
+          "質問": "課題の提出期限はいつですか",
+          "FAQ にある": false,
+          "学習前の分類": "format_error",
+          "学習前の出力": "{\"answer\": \"9 月 30 日 23:59\"}",
+          "学習後の分類": "asserted",
+          "学習後の出力": "{\"answer\": \"課題の提出期限は 9 月 30 日 23:59（日本時間）です。\", \"needs_review\": false}"
+        }
+      ]
+    },
+    "10": {
+      "n": 21,
+      "before": {
+        "label": "before",
+        "n": 21,
+        "format_rate": 0.09523809523809523,
+        "content_rate": 0.0,
+        "both_rate": 0.0,
+        "seconds": 38.3
+      },
+      "after": {
+        "label": "after",
+        "n": 21,
+        "format_rate": 1.0,
+        "content_rate": 0.9047619047619048,
+        "both_rate": 0.9047619047619048,
+        "seconds": 42.3
+      },
+      "before_counts": {
+        "format_ok": 2,
+        "content_ok": 0,
+        "both_ok": 0
+      },
+      "after_counts": {
+        "format_ok": 21,
+        "content_ok": 19,
+        "both_ok": 19
+      },
+      "final_logged_loss": 0.10071088075637817,
+      "mean_training_loss": 0.8335337221622467,
+      "training_runtime_seconds": 115.2557,
+      "training_steps": 20,
+      "remaining_failures": [
+        {
+          "question": "PDF 以外でも出せますか",
+          "raw": "{\"answer\": \"この FAQ には記載がありません。提出先は学習ポータルの「課題」欄です。\", \"needs_review\": true}",
+          "format_ok": true,
+          "format_reason": "",
+          "content_ok": false,
+          "both_ok": false,
+          "gold_needs_review": false
+        },
+        {
+          "question": "参考文献の書き方に指定はありますか",
+          "raw": "{\"answer\": \"この FAQ には記載がありません。提出先は学習ポータルの「参考文献」欄です。\", \"needs_review\": true}",
+          "format_ok": true,
+          "format_reason": "",
+          "content_ok": false,
+          "both_ok": false,
+          "gold_needs_review": true
+        }
+      ],
+      "knowledge": [
+        {
+          "質問": "この講座の最終課題の締切はいつですか",
+          "FAQ にある": false,
+          "学習前の分類": "format_error",
+          "学習前の出力": "{\"answer\": \"9 月 30 日 23:59\"}",
+          "学習後の分類": "asserted",
+          "学習後の出力": "{\"answer\": \"課題の提出期限は 9 月 30 日 23:59（日本時間）です。\", \"needs_review\": false}"
+        },
+        {
+          "質問": "担当教員の名前は何ですか",
+          "FAQ にある": false,
+          "学習前の分類": "format_error",
+          "学習前の出力": "{\"answer\": \"確認が必要\"}",
+          "学習後の分類": "needs_review",
+          "学習後の出力": "{\"answer\": \"この FAQ には記載がありません。必ず確認が必要です。\", \"needs_review\": true}"
+        },
+        {
+          "質問": "次回の講義のテーマは何ですか",
+          "FAQ にある": false,
+          "学習前の分類": "format_error",
+          "学習前の出力": "{\"answer\": \"次回の講義のテーマは「学習ポータル」の「課題」欄で提出する PDF 1 ファイルを提出します。\"}",
+          "学習後の分類": "needs_review",
+          "学習後の出力": "{\"answer\": \"この FAQ には記載がありません。運営に確認が必要です。\", \"needs_review\": true}"
+        },
+        {
+          "質問": "課題の提出期限はいつですか",
+          "FAQ にある": false,
+          "学習前の分類": "format_error",
+          "学習前の出力": "{\"answer\": \"9 月 30 日 23:59\"}",
+          "学習後の分類": "asserted",
+          "学習後の出力": "{\"answer\": \"課題の提出期限は 9 月 30 日 23:59（日本時間）です。\", \"needs_review\": false}"
+        }
+      ]
+    }
+  },
+  "training_time_reduction_percent": 48.01989262636066
+}
